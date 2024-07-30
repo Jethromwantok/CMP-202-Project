@@ -73,3 +73,47 @@ public class GPACalculatorApp {
             return totalCourseUnits == 0 ? 0 : totalPoints / totalCourseUnits;
         }
     }
+
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("GPA Calculator");
+        frame.setSize(600, 400);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+
+        // Panel for course input
+        JPanel inputPanel = new JPanel(new GridLayout(2, 4));
+        JLabel codeLabel = new JLabel("Course Code:");
+        JLabel unitLabel = new JLabel("Course Unit:");
+        JLabel gradeLabel = new JLabel("Grade (%):");
+        JTextField courseCodeField = new JTextField();
+        JTextField courseUnitField = new JTextField();
+        JTextField gradeField = new JTextField();
+        JButton addButton = new JButton("Add Course");
+
+        inputPanel.add(codeLabel);
+        inputPanel.add(unitLabel);
+        inputPanel.add(gradeLabel);
+        inputPanel.add(new JLabel("")); // Empty space
+        inputPanel.add(courseCodeField);
+        inputPanel.add(courseUnitField);
+        inputPanel.add(gradeField);
+        inputPanel.add(addButton);
+
+        // Panel for displaying added courses
+        JTextArea coursesArea = new JTextArea();
+        coursesArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(coursesArea);
+
+        // Button to calculate GPA
+        JButton calculateButton = new JButton("Calculate GPA");
+        JTextArea resultArea = new JTextArea();
+        resultArea.setEditable(false);
+
+        // Main panel to hold all components
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.add(inputPanel, BorderLayout.NORTH);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
+        mainPanel.add(calculateButton, BorderLayout.SOUTH);
+
+        frame.add(mainPanel, BorderLayout.CENTER);
+        frame.add(resultArea, BorderLayout.SOUTH);
