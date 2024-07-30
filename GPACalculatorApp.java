@@ -46,3 +46,30 @@ public class GPACalculatorApp {
     }
 
 }
+
+    // Define method to convert percentage to GPA points
+    static class GradeConverter {
+        public static double convertPercentageToGPA(double percentage) {
+            if (percentage >= 70.0) return 5.0;   // A
+            if (percentage >= 60.0) return 4.0;   // B
+            if (percentage >= 50.0) return 3.0;   // C
+            if (percentage >= 45.0) return 2.0;   // D
+            if (percentage >= 40.0) return 1.0;   // E
+            return 0.0;                          // F
+        }
+    }
+
+    // Define method to calculate GPA
+    static class GPACalculator {
+        public static double calculateGPA(ArrayList<Course> courses) {
+            double totalPoints = 0;
+            int totalCourseUnits = 0;
+
+            for (Course course : courses) {
+                totalPoints += course.getGrade() * course.getCourseUnit();
+                totalCourseUnits += course.getCourseUnit();
+            }
+
+            return totalCourseUnits == 0 ? 0 : totalPoints / totalCourseUnits;
+        }
+    }
