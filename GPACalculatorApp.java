@@ -117,3 +117,33 @@ public class GPACalculatorApp {
 
         frame.add(mainPanel, BorderLayout.CENTER);
         frame.add(resultArea, BorderLayout.SOUTH);
+
+                Student student = new Student();
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String code = courseCodeField.getText();
+                    int courseUnit = Integer.parseInt(courseUnitField.getText());
+                    double percentageGrade = Double.parseDouble(gradeField.getText());
+                    double gpaGrade = GradeConverter.convertPercentageToGPA(percentageGrade);
+
+                    if (percentageGrade > 100.0) {
+                        JOptionPane.showMessageDialog(frame, "Grade cannot be greater than 100%");
+                        return;
+                    }
+
+                    Course course = new Course(code, courseUnit, gpaGrade);
+                    student.addCourse(course);
+
+                    coursesArea.append("Course Code: " + code + ", Course Unit: " + courseUnit + ", Grade: " + gpaGrade + "\n");
+
+                    courseCodeField.setText("");
+                    courseUnitField.setText("");
+                    gradeField.setText("");
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(frame, "Please enter valid numbers for course unit and grade.");
+                }
+            }
+        });
