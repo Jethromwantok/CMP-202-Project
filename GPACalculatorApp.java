@@ -147,3 +147,26 @@ public class GPACalculatorApp {
                 }
             }
         });
+
+                calculateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Course> courses = student.getCourses();
+                double gpa = GPACalculator.calculateGPA(courses);
+                resultArea.setText("GPA: " + gpa);
+
+                try (FileWriter writer = new FileWriter("gpa.txt")) {
+                    for (Course course : courses) {
+                        writer.write(course.getCode() + " " + course.getCourseUnit() + " " + course.getGrade() + "\n");
+                    }
+                    writer.write("GPA: " + gpa);
+                } catch (IOException ioException) {
+                    JOptionPane.showMessageDialog(frame, "Error writing to file.");
+                }
+            }
+        });
+
+        frame.setVisible(true);
+    }
+}
+
